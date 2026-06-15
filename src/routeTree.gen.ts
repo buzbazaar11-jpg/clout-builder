@@ -9,7 +9,6 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as ServicesRouteImport } from './routes/services'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as IndustriesRouteImport } from './routes/industries'
 import { Route as FaqRouteImport } from './routes/faq'
@@ -17,17 +16,14 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CaseStudiesRouteImport } from './routes/case-studies'
 import { Route as CareersRouteImport } from './routes/careers'
 import { Route as BlogRouteImport } from './routes/blog'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ServicesIndexRouteImport } from './routes/services.index'
 import { Route as AboutIndexRouteImport } from './routes/about.index'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AboutTeamRouteImport } from './routes/about.team'
 
-const ServicesRoute = ServicesRouteImport.update({
-  id: '/services',
-  path: '/services',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const PricingRoute = PricingRouteImport.update({
   id: '/pricing',
   path: '/pricing',
@@ -63,15 +59,25 @@ const BlogRoute = BlogRouteImport.update({
   path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AboutIndexRoute = AboutIndexRouteImport.update({
-  id: '/about/',
-  path: '/about/',
+const ServicesIndexRoute = ServicesIndexRouteImport.update({
+  id: '/services/',
+  path: '/services/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AboutIndexRoute = AboutIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AboutRoute,
 } as any)
 const ServicesSlugRoute = ServicesSlugRouteImport.update({
   id: '/$slug',
@@ -84,13 +90,14 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   getParentRoute: () => BlogRoute,
 } as any)
 const AboutTeamRoute = AboutTeamRouteImport.update({
-  id: '/about/team',
-  path: '/about/team',
-  getParentRoute: () => rootRouteImport,
+  id: '/team',
+  path: '/team',
+  getParentRoute: () => AboutRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRouteWithChildren
   '/blog': typeof BlogRouteWithChildren
   '/careers': typeof CareersRoute
   '/case-studies': typeof CaseStudiesRoute
@@ -98,11 +105,11 @@ export interface FileRoutesByFullPath {
   '/faq': typeof FaqRoute
   '/industries': typeof IndustriesRoute
   '/pricing': typeof PricingRoute
-  '/services': typeof ServicesRouteWithChildren
   '/about/team': typeof AboutTeamRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/about/': typeof AboutIndexRoute
+  '/services/': typeof ServicesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -113,15 +120,16 @@ export interface FileRoutesByTo {
   '/faq': typeof FaqRoute
   '/industries': typeof IndustriesRoute
   '/pricing': typeof PricingRoute
-  '/services': typeof ServicesRouteWithChildren
   '/about/team': typeof AboutTeamRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/about': typeof AboutIndexRoute
+  '/services': typeof ServicesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRouteWithChildren
   '/blog': typeof BlogRouteWithChildren
   '/careers': typeof CareersRoute
   '/case-studies': typeof CaseStudiesRoute
@@ -129,16 +137,17 @@ export interface FileRoutesById {
   '/faq': typeof FaqRoute
   '/industries': typeof IndustriesRoute
   '/pricing': typeof PricingRoute
-  '/services': typeof ServicesRouteWithChildren
   '/about/team': typeof AboutTeamRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/about/': typeof AboutIndexRoute
+  '/services/': typeof ServicesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about'
     | '/blog'
     | '/careers'
     | '/case-studies'
@@ -146,11 +155,11 @@ export interface FileRouteTypes {
     | '/faq'
     | '/industries'
     | '/pricing'
-    | '/services'
     | '/about/team'
     | '/blog/$slug'
     | '/services/$slug'
     | '/about/'
+    | '/services/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -161,14 +170,15 @@ export interface FileRouteTypes {
     | '/faq'
     | '/industries'
     | '/pricing'
-    | '/services'
     | '/about/team'
     | '/blog/$slug'
     | '/services/$slug'
     | '/about'
+    | '/services'
   id:
     | '__root__'
     | '/'
+    | '/about'
     | '/blog'
     | '/careers'
     | '/case-studies'
@@ -176,15 +186,16 @@ export interface FileRouteTypes {
     | '/faq'
     | '/industries'
     | '/pricing'
-    | '/services'
     | '/about/team'
     | '/blog/$slug'
     | '/services/$slug'
     | '/about/'
+    | '/services/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRouteWithChildren
   BlogRoute: typeof BlogRouteWithChildren
   CareersRoute: typeof CareersRoute
   CaseStudiesRoute: typeof CaseStudiesRoute
@@ -192,20 +203,11 @@ export interface RootRouteChildren {
   FaqRoute: typeof FaqRoute
   IndustriesRoute: typeof IndustriesRoute
   PricingRoute: typeof PricingRoute
-  ServicesRoute: typeof ServicesRouteWithChildren
-  AboutTeamRoute: typeof AboutTeamRoute
-  AboutIndexRoute: typeof AboutIndexRoute
+  ServicesIndexRoute: typeof ServicesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/services': {
-      id: '/services'
-      path: '/services'
-      fullPath: '/services'
-      preLoaderRoute: typeof ServicesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/pricing': {
       id: '/pricing'
       path: '/pricing'
@@ -255,6 +257,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -262,12 +271,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services/': {
+      id: '/services/'
+      path: '/services'
+      fullPath: '/services/'
+      preLoaderRoute: typeof ServicesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about/': {
       id: '/about/'
-      path: '/about'
+      path: '/'
       fullPath: '/about/'
       preLoaderRoute: typeof AboutIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AboutRoute
     }
     '/services/$slug': {
       id: '/services/$slug'
@@ -285,13 +301,25 @@ declare module '@tanstack/react-router' {
     }
     '/about/team': {
       id: '/about/team'
-      path: '/about/team'
+      path: '/team'
       fullPath: '/about/team'
       preLoaderRoute: typeof AboutTeamRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AboutRoute
     }
   }
 }
+
+interface AboutRouteChildren {
+  AboutTeamRoute: typeof AboutTeamRoute
+  AboutIndexRoute: typeof AboutIndexRoute
+}
+
+const AboutRouteChildren: AboutRouteChildren = {
+  AboutTeamRoute: AboutTeamRoute,
+  AboutIndexRoute: AboutIndexRoute,
+}
+
+const AboutRouteWithChildren = AboutRoute._addFileChildren(AboutRouteChildren)
 
 interface BlogRouteChildren {
   BlogSlugRoute: typeof BlogSlugRoute
@@ -303,20 +331,9 @@ const BlogRouteChildren: BlogRouteChildren = {
 
 const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
 
-interface ServicesRouteChildren {
-  ServicesSlugRoute: typeof ServicesSlugRoute
-}
-
-const ServicesRouteChildren: ServicesRouteChildren = {
-  ServicesSlugRoute: ServicesSlugRoute,
-}
-
-const ServicesRouteWithChildren = ServicesRoute._addFileChildren(
-  ServicesRouteChildren,
-)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRouteWithChildren,
   BlogRoute: BlogRouteWithChildren,
   CareersRoute: CareersRoute,
   CaseStudiesRoute: CaseStudiesRoute,
@@ -324,10 +341,18 @@ const rootRouteChildren: RootRouteChildren = {
   FaqRoute: FaqRoute,
   IndustriesRoute: IndustriesRoute,
   PricingRoute: PricingRoute,
-  ServicesRoute: ServicesRouteWithChildren,
-  AboutTeamRoute: AboutTeamRoute,
-  AboutIndexRoute: AboutIndexRoute,
+  ServicesIndexRoute: ServicesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

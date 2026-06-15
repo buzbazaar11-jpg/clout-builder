@@ -4,7 +4,7 @@ import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { Section, CTAStrip } from "../components/site/Section";
 import { services, CURRENCIES, formatPrice, type CurrencyCode } from "../lib/services-data";
 
-export const Route = createFileRoute("/services")({
+export const Route = createFileRoute("/services/")({
   head: () => ({
     meta: [
       { title: "Services — AYMO Digital | AI, Content, Growth & Web" },

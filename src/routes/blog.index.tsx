@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Section, CTAStrip } from "../components/site/Section";
 import { blogPosts } from "../lib/blog-data";
 
-export const Route = createFileRoute("/blog")({
+export const Route = createFileRoute("/blog/")({
   head: () => ({
     meta: [
       { title: "Blog — AYMO Digital | AI, Growth & Brand Insights" },
