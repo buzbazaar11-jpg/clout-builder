@@ -161,7 +161,7 @@ function Hero() {
           </div>
 
           {/* RIGHT */}
-          <div className="relative" style={{ minHeight: 540 }}>
+          <div className="relative md:min-h-[540px]">
             <Reveal direction="scale">
               <div
                 className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-[32px] border border-white/70 shadow-[0_25px_70px_-20px_rgba(15,50,70,0.25)]"
@@ -335,16 +335,20 @@ function TrustedBy() {
           {regions.map((r) => (
             <span
               key={r}
-              className="rounded-full border border-border bg-white px-5 py-2.5 text-sm font-medium text-foreground/80 shadow-sm transition hover:-translate-y-0.5 hover:border-primary/40 hover:text-foreground"
+              className="rounded-full border border-border bg-white px-4 py-2 text-sm font-medium text-foreground/80 shadow-sm transition hover:-translate-y-0.5 hover:border-primary/40 hover:text-foreground sm:px-5 sm:py-2.5"
             >
               {r}
             </span>
           ))}
         </div>
+        <div className="mt-8 mx-auto max-w-2xl rounded-full border border-primary/30 bg-white/80 px-4 py-2.5 text-center text-xs sm:text-sm font-medium text-foreground/80 backdrop-blur">
+          🤝 Officially partnered with <span className="font-bold text-primary">AM Enterprises</span> — operating across UK, USA, UAE, Australia & 5+ more countries.
+        </div>
       </Reveal>
     </section>
   );
 }
+
 
 /* ----------------------------- STATS ------------------------------ */
 
