@@ -281,7 +281,8 @@ function Hero() {
             </div>
           </div>
         </div>
-        </div>
+
+
 
         {/* Booking-widget style metric strip */}
         <Reveal direction="up" delay={400}>
