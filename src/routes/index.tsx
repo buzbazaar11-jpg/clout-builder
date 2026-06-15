@@ -180,7 +180,7 @@ function Hero() {
 
             {/* Floating Card: Revenue */}
             <div
-              className="glass absolute -left-2 sm:-left-8 top-6 w-56 rounded-2xl p-4 animate-float"
+              className="glass hidden md:block absolute -left-2 sm:-left-8 top-6 w-56 rounded-2xl p-4 animate-float"
               style={{ transform: px(18) }}
             >
               <div className="flex items-center justify-between">
@@ -204,15 +204,15 @@ function Hero() {
 
             {/* Floating Card: AI Automation */}
             <div
-              className="glass absolute -right-2 sm:-right-6 top-24 w-60 rounded-2xl p-4 animate-float"
+              className="glass hidden md:block absolute -right-2 sm:-right-6 top-24 w-60 rounded-2xl p-4 animate-float"
               style={{ animationDelay: "1.2s", transform: px(22) }}
             >
               <div className="flex items-center gap-3">
                 <div className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-primary to-[oklch(0.65_0.14_220)] text-white">
                   <Bot size={18} />
                 </div>
-                <div className="flex-1">
-                  <div className="text-sm font-semibold">AI Automation</div>
+                <div className="flex-1 min-w-0">
+                  <div className="text-sm font-semibold truncate">AI Automation</div>
                   <div className="text-[11px] text-muted-foreground">12 workflows active</div>
                 </div>
                 <span className="h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_0_4px_rgba(16,185,129,0.18)]" />
@@ -230,7 +230,7 @@ function Hero() {
 
             {/* Floating Card: YouTube */}
             <div
-              className="glass absolute left-0 sm:-left-10 bottom-24 w-52 rounded-2xl p-4 animate-float"
+              className="glass hidden lg:block absolute left-0 sm:-left-10 bottom-24 w-52 rounded-2xl p-4 animate-float"
               style={{ animationDelay: "2.4s", transform: px(16) }}
             >
               <div className="flex items-center gap-2">
@@ -246,7 +246,7 @@ function Hero() {
 
             {/* Floating Card: TikTok */}
             <div
-              className="glass absolute right-0 sm:-right-4 bottom-32 w-48 rounded-2xl p-3.5 animate-float"
+              className="glass hidden lg:block absolute right-0 sm:-right-4 bottom-32 w-48 rounded-2xl p-3.5 animate-float"
               style={{ animationDelay: "0.6s", transform: px(20) }}
             >
               <div className="flex items-center gap-2">
@@ -262,7 +262,7 @@ function Hero() {
 
             {/* Floating Card: Client Satisfaction */}
             <div
-              className="glass absolute left-1/2 -translate-x-1/2 -bottom-2 w-64 rounded-2xl p-3.5 animate-float"
+              className="glass hidden md:block absolute left-1/2 -translate-x-1/2 -bottom-2 w-64 rounded-2xl p-3.5 animate-float"
               style={{ animationDelay: "1.8s", transform: `translate(calc(-50% + ${(mouse.x * 14).toFixed(1)}px), ${(mouse.y * 14).toFixed(1)}px)` }}
             >
               <div className="flex items-center justify-between">
@@ -280,6 +280,7 @@ function Hero() {
               </div>
             </div>
           </div>
+        </div>
         </div>
 
         {/* Booking-widget style metric strip */}
