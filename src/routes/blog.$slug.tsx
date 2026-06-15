@@ -68,7 +68,7 @@ function BlogPostPage() {
         </div>
 
         <div className="mt-10 space-y-8">
-          {post.content.map((s) => (
+          {post.content.map((s: { heading: string; body: string }) => (
             <section key={s.heading}>
               <h2 className="text-xl sm:text-2xl font-bold tracking-tight">{s.heading}</h2>
               <p className="mt-3 text-sm sm:text-base text-foreground/80 leading-relaxed">{s.body}</p>

@@ -120,7 +120,7 @@ function ServiceDetail() {
       {/* What's included */}
       <Section eyebrow="What's Included" title={<>Everything In <span className="text-gold-gradient">The Plan</span></>}>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {service.includes.map((i) => (
+          {service.includes.map((i: string) => (
             <div key={i} className="flex items-start gap-2 rounded-2xl border border-border bg-white p-4 text-sm">
               <CheckCircle2 size={16} className="mt-0.5 text-primary shrink-0" />
               <span>{i}</span>
@@ -132,7 +132,7 @@ function ServiceDetail() {
       {/* Workflow */}
       <Section eyebrow="Our Workflow" title={<>How We <span className="text-gold-gradient">Deliver</span></>}>
         <div className="grid gap-4 md:grid-cols-2">
-          {service.workflow.map((w, idx) => (
+          {service.workflow.map((w: { step: string; detail: string }, idx: number) => (
             <div key={w.step} className="soft-card rounded-2xl p-6">
               <div className="flex items-center gap-3">
                 <div className="grid h-9 w-9 place-items-center rounded-xl bg-primary/15 text-sm font-bold text-primary">
@@ -149,7 +149,7 @@ function ServiceDetail() {
       {/* Deliverables */}
       <Section eyebrow="Deliverables" title={<>What You <span className="text-gold-gradient">Receive</span></>}>
         <ul className="grid gap-3 sm:grid-cols-2">
-          {service.deliverables.map((d) => (
+          {service.deliverables.map((d: string) => (
             <li key={d} className="flex items-start gap-2 rounded-2xl bg-white border border-border p-4 text-sm">
               <Sparkles size={16} className="mt-0.5 text-primary shrink-0" />
               <span>{d}</span>
@@ -161,7 +161,7 @@ function ServiceDetail() {
       {/* FAQ */}
       <Section eyebrow="FAQ" title={<>Common <span className="text-gold-gradient">Questions</span></>}>
         <div className="grid gap-3 md:grid-cols-2">
-          {service.faq.map((f) => (
+          {service.faq.map((f: { q: string; a: string }) => (
             <div key={f.q} className="soft-card rounded-2xl p-6">
               <h3 className="font-semibold text-sm sm:text-base">{f.q}</h3>
               <p className="mt-2 text-sm text-muted-foreground">{f.a}</p>
