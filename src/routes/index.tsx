@@ -161,7 +161,7 @@ function Hero() {
           </div>
 
           {/* RIGHT */}
-          <div className="relative" style={{ minHeight: 540 }}>
+          <div className="relative md:min-h-[540px]">
             <Reveal direction="scale">
               <div
                 className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-[32px] border border-white/70 shadow-[0_25px_70px_-20px_rgba(15,50,70,0.25)]"
@@ -180,7 +180,7 @@ function Hero() {
 
             {/* Floating Card: Revenue */}
             <div
-              className="glass absolute -left-2 sm:-left-8 top-6 w-56 rounded-2xl p-4 animate-float"
+              className="glass hidden md:block absolute -left-2 sm:-left-8 top-6 w-56 rounded-2xl p-4 animate-float"
               style={{ transform: px(18) }}
             >
               <div className="flex items-center justify-between">
@@ -204,15 +204,15 @@ function Hero() {
 
             {/* Floating Card: AI Automation */}
             <div
-              className="glass absolute -right-2 sm:-right-6 top-24 w-60 rounded-2xl p-4 animate-float"
+              className="glass hidden md:block absolute -right-2 sm:-right-6 top-24 w-60 rounded-2xl p-4 animate-float"
               style={{ animationDelay: "1.2s", transform: px(22) }}
             >
               <div className="flex items-center gap-3">
                 <div className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-primary to-[oklch(0.65_0.14_220)] text-white">
                   <Bot size={18} />
                 </div>
-                <div className="flex-1">
-                  <div className="text-sm font-semibold">AI Automation</div>
+                <div className="flex-1 min-w-0">
+                  <div className="text-sm font-semibold truncate">AI Automation</div>
                   <div className="text-[11px] text-muted-foreground">12 workflows active</div>
                 </div>
                 <span className="h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_0_4px_rgba(16,185,129,0.18)]" />
@@ -230,7 +230,7 @@ function Hero() {
 
             {/* Floating Card: YouTube */}
             <div
-              className="glass absolute left-0 sm:-left-10 bottom-24 w-52 rounded-2xl p-4 animate-float"
+              className="glass hidden lg:block absolute left-0 sm:-left-10 bottom-24 w-52 rounded-2xl p-4 animate-float"
               style={{ animationDelay: "2.4s", transform: px(16) }}
             >
               <div className="flex items-center gap-2">
@@ -246,7 +246,7 @@ function Hero() {
 
             {/* Floating Card: TikTok */}
             <div
-              className="glass absolute right-0 sm:-right-4 bottom-32 w-48 rounded-2xl p-3.5 animate-float"
+              className="glass hidden lg:block absolute right-0 sm:-right-4 bottom-32 w-48 rounded-2xl p-3.5 animate-float"
               style={{ animationDelay: "0.6s", transform: px(20) }}
             >
               <div className="flex items-center gap-2">
@@ -262,7 +262,7 @@ function Hero() {
 
             {/* Floating Card: Client Satisfaction */}
             <div
-              className="glass absolute left-1/2 -translate-x-1/2 -bottom-2 w-64 rounded-2xl p-3.5 animate-float"
+              className="glass hidden md:block absolute left-1/2 -translate-x-1/2 -bottom-2 w-64 rounded-2xl p-3.5 animate-float"
               style={{ animationDelay: "1.8s", transform: `translate(calc(-50% + ${(mouse.x * 14).toFixed(1)}px), ${(mouse.y * 14).toFixed(1)}px)` }}
             >
               <div className="flex items-center justify-between">
@@ -281,6 +281,8 @@ function Hero() {
             </div>
           </div>
         </div>
+
+
 
         {/* Booking-widget style metric strip */}
         <Reveal direction="up" delay={400}>
@@ -333,16 +335,20 @@ function TrustedBy() {
           {regions.map((r) => (
             <span
               key={r}
-              className="rounded-full border border-border bg-white px-5 py-2.5 text-sm font-medium text-foreground/80 shadow-sm transition hover:-translate-y-0.5 hover:border-primary/40 hover:text-foreground"
+              className="rounded-full border border-border bg-white px-4 py-2 text-sm font-medium text-foreground/80 shadow-sm transition hover:-translate-y-0.5 hover:border-primary/40 hover:text-foreground sm:px-5 sm:py-2.5"
             >
               {r}
             </span>
           ))}
         </div>
+        <div className="mt-8 mx-auto max-w-2xl rounded-full border border-primary/30 bg-white/80 px-4 py-2.5 text-center text-xs sm:text-sm font-medium text-foreground/80 backdrop-blur">
+          🤝 Officially partnered with <span className="font-bold text-primary">AM Enterprises</span> — operating across UK, USA, UAE, Australia & 5+ more countries.
+        </div>
       </Reveal>
     </section>
   );
 }
+
 
 /* ----------------------------- STATS ------------------------------ */
 
