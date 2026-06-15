@@ -3,7 +3,7 @@ import { Section, CTAStrip } from "../components/site/Section";
 import { Globe2, Building2, Award, Handshake } from "lucide-react";
 import aboutBg from "../assets/about-bg.jpg";
 
-export const Route = createFileRoute("/about")({
+export const Route = createFileRoute("/about/")({
   head: () => ({
     meta: [
       { title: "About — AYMO Digital | Global Growth Agency" },
