@@ -295,7 +295,7 @@ function Hero() {
                 </div>
               ))}
             </div>
-
+          </div>
         </Reveal>
       </div>
     </section>
