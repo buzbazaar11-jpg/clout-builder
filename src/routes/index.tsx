@@ -89,25 +89,90 @@ function Hero() {
     <section className="container-px mx-auto max-w-7xl pt-8 md:pt-12">
       <div
         ref={heroRef}
-        className="relative overflow-hidden rounded-[36px] bg-slate-950 px-6 py-16 md:px-12 md:py-24 lg:py-28"
+        className="relative overflow-hidden rounded-[36px] bg-gradient-to-br from-[oklch(0.96_0.02_205)] via-white to-[oklch(0.94_0.03_210)] px-6 py-16 md:px-12 md:py-24 lg:py-28"
       >
-        {/* Background video */}
-        <video
-          src={heroVideoAsset.url}
-          poster={heroStrategist}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
+        {/* Soft background image — barely visible, premium feel */}
+        <img
+          src={heroStrategist}
+          alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.12] mix-blend-luminosity"
         />
-        {/* Dark + brand gradient overlays for readability */}
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-slate-950/85 via-slate-950/70 to-slate-900/60" />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent" />
-        <div className="pointer-events-none absolute -top-32 -left-24 h-[420px] w-[420px] rounded-full bg-primary/30 blur-3xl animate-blob" />
-        <div className="pointer-events-none absolute -bottom-40 right-0 h-[460px] w-[460px] rounded-full bg-[oklch(0.78_0.13_220/0.30)] blur-3xl animate-blob" style={{ animationDelay: "3s" }} />
+        {/* Light wash so foreground stays crisp */}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/70 via-white/40 to-white/70" />
+        {/* Premium animated blobs */}
+        <div className="pointer-events-none absolute -top-40 -left-32 h-[520px] w-[520px] rounded-full bg-primary/25 blur-3xl animate-blob" />
+        <div className="pointer-events-none absolute -bottom-48 -right-24 h-[560px] w-[560px] rounded-full bg-[oklch(0.78_0.13_220/0.28)] blur-3xl animate-blob" style={{ animationDelay: "3s" }} />
+        <div className="pointer-events-none absolute top-1/3 right-1/3 h-[320px] w-[320px] rounded-full bg-[oklch(0.85_0.14_85/0.22)] blur-3xl animate-blob" style={{ animationDelay: "6s" }} />
+        {/* Subtle grid texture */}
+        <div className="pointer-events-none absolute inset-0 opacity-[0.06] [background-image:linear-gradient(to_right,oklch(0.55_0.13_215)_1px,transparent_1px),linear-gradient(to_bottom,oklch(0.55_0.13_215)_1px,transparent_1px)] [background-size:48px_48px]" />
+
+        <div className="relative grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-center">
+          {/* LEFT */}
+          <div>
+            <Reveal direction="up">
+              <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-white/80 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-primary backdrop-blur">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-60" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+                </span>
+                AI · Automation · Growth
+              </div>
+            </Reveal>
+
+            <Reveal direction="up" delay={80}>
+              <h1 className="mt-6 font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05] tracking-tight text-foreground">
+                Scale Your Business with{" "}
+                <span className="text-gold-gradient">AI Automation,</span>{" "}
+                Content & Digital Growth
+              </h1>
+            </Reveal>
+
+            <Reveal direction="up" delay={160}>
+              <p className="mt-6 max-w-xl text-base md:text-lg text-muted-foreground leading-relaxed">
+                We build automated systems that generate leads, sales and revenue — combining
+                AI workflows, performance marketing and authority content across YouTube,
+                LinkedIn and Short-Form.
+              </p>
+            </Reveal>
+
+            <Reveal direction="up" delay={240}>
+              <div className="mt-8 flex flex-wrap items-center gap-3">
+                <Link
+                  to="/contact"
+                  className="group inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-primary to-[oklch(0.65_0.14_220)] px-6 py-3.5 text-sm font-semibold text-white shadow-[0_15px_40px_-12px_oklch(0.65_0.14_220)] transition hover:-translate-y-0.5 hover:brightness-110"
+                >
+                  Book Free Strategy Call
+                  <ArrowRight size={16} className="transition group-hover:translate-x-1" />
+                </Link>
+                <Link
+                  to="/case-studies"
+                  className="inline-flex items-center gap-2 rounded-2xl border border-border bg-white/70 px-6 py-3.5 text-sm font-semibold text-foreground backdrop-blur transition hover:border-primary/50 hover:bg-white"
+                >
+                  <PlayCircle size={16} className="text-primary" />
+                  View Results
+                </Link>
+              </div>
+            </Reveal>
+
+            <Reveal direction="up" delay={320}>
+              <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3">
+                <div className="flex -space-x-2">
+                  {["#a7e9ec", "#79d4dc", "#5eb9d6", "#3c8fb8"].map((c, i) => (
+                    <span key={i} className="h-9 w-9 rounded-full border-2 border-white shadow" style={{ background: c }} />
+                  ))}
+                </div>
+                <div className="flex items-center gap-1.5">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} size={14} className="fill-amber-400 text-amber-400" />
+                  ))}
+                  <span className="ml-1.5 text-sm font-semibold text-foreground">4.9/5</span>
+                  <span className="text-xs text-muted-foreground">from 120+ founders</span>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+
 
         <div className="relative grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-center">
           {/* LEFT */}
