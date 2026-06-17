@@ -24,6 +24,7 @@ import {
   PlayCircle,
 } from "lucide-react";
 import heroStrategist from "../assets/hero-strategist.jpg";
+import heroVideoAsset from "../assets/hero-animate.mp4.asset.json";
 import { Section, CTAStrip } from "../components/site/Section";
 import { Reveal, CountUp } from "../components/site/Reveal";
 
@@ -164,17 +165,21 @@ function Hero() {
           <div className="relative md:min-h-[540px]">
             <Reveal direction="scale">
               <div
-                className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-[32px] border border-white/70 shadow-[0_25px_70px_-20px_rgba(15,50,70,0.25)]"
+                className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-[32px] border border-white/70 bg-black shadow-[0_25px_70px_-20px_rgba(15,50,70,0.25)]"
                 style={{ transform: px(-12) }}
               >
-                <img
-                  src={heroStrategist}
-                  alt="Digital strategist at AYMO Digital"
-                  width={1024}
-                  height={1280}
+                <video
+                  src={heroVideoAsset.url}
+                  poster={heroStrategist}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  aria-label="AYMO Digital cinematic hero reel"
                   className="h-full w-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-white/40 via-transparent to-transparent" />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
               </div>
             </Reveal>
 
