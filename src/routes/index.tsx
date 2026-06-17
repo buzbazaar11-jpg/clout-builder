@@ -89,19 +89,33 @@ function Hero() {
     <section className="container-px mx-auto max-w-7xl pt-8 md:pt-12">
       <div
         ref={heroRef}
-        className="relative overflow-hidden rounded-[36px] bg-gradient-to-br from-[oklch(0.94_0.03_205)] via-[oklch(0.96_0.025_205)] to-[oklch(0.92_0.04_210)] px-6 py-12 md:px-12 md:py-16 lg:py-20"
+        className="relative overflow-hidden rounded-[36px] bg-slate-950 px-6 py-16 md:px-12 md:py-24 lg:py-28"
       >
-        {/* soft animated blobs */}
-        <div className="pointer-events-none absolute -top-32 -left-24 h-[420px] w-[420px] rounded-full bg-primary/20 blur-3xl animate-blob" />
-        <div className="pointer-events-none absolute -bottom-40 right-0 h-[460px] w-[460px] rounded-full bg-[oklch(0.78_0.13_220/0.18)] blur-3xl animate-blob" style={{ animationDelay: "3s" }} />
+        {/* Background video */}
+        <video
+          src={heroVideoAsset.url}
+          poster={heroStrategist}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+        />
+        {/* Dark + brand gradient overlays for readability */}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-slate-950/85 via-slate-950/70 to-slate-900/60" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent" />
+        <div className="pointer-events-none absolute -top-32 -left-24 h-[420px] w-[420px] rounded-full bg-primary/30 blur-3xl animate-blob" />
+        <div className="pointer-events-none absolute -bottom-40 right-0 h-[460px] w-[460px] rounded-full bg-[oklch(0.78_0.13_220/0.30)] blur-3xl animate-blob" style={{ animationDelay: "3s" }} />
 
         <div className="relative grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-center">
           {/* LEFT */}
           <div>
             <Reveal direction="up">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-white/80 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-primary backdrop-blur">
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-white backdrop-blur">
                 <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-60" />
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-70" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
                 </span>
                 AI · Automation · Growth
@@ -109,7 +123,7 @@ function Hero() {
             </Reveal>
 
             <Reveal direction="up" delay={80}>
-              <h1 className="mt-6 font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05] tracking-tight text-foreground">
+              <h1 className="mt-6 font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05] tracking-tight text-white">
                 Scale Your Business with{" "}
                 <span className="text-gold-gradient">AI Automation,</span>{" "}
                 Content & Digital Growth
@@ -117,7 +131,7 @@ function Hero() {
             </Reveal>
 
             <Reveal direction="up" delay={160}>
-              <p className="mt-6 max-w-xl text-base md:text-lg text-muted-foreground leading-relaxed">
+              <p className="mt-6 max-w-xl text-base md:text-lg text-white/80 leading-relaxed">
                 We build automated systems that generate leads, sales and revenue — combining
                 AI workflows, performance marketing and authority content across YouTube,
                 LinkedIn and Short-Form.
@@ -135,9 +149,9 @@ function Hero() {
                 </Link>
                 <Link
                   to="/case-studies"
-                  className="inline-flex items-center gap-2 rounded-2xl border border-border bg-white/70 px-6 py-3.5 text-sm font-semibold text-foreground backdrop-blur transition hover:border-primary/50 hover:bg-white"
+                  className="inline-flex items-center gap-2 rounded-2xl border border-white/30 bg-white/10 px-6 py-3.5 text-sm font-semibold text-white backdrop-blur transition hover:border-white/60 hover:bg-white/20"
                 >
-                  <PlayCircle size={16} className="text-primary" />
+                  <PlayCircle size={16} className="text-white" />
                   View Results
                 </Link>
               </div>
@@ -154,38 +168,18 @@ function Hero() {
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} size={14} className="fill-amber-400 text-amber-400" />
                   ))}
-                  <span className="ml-1.5 text-sm font-semibold text-foreground">4.9/5</span>
-                  <span className="text-xs text-muted-foreground">from 120+ founders</span>
+                  <span className="ml-1.5 text-sm font-semibold text-white">4.9/5</span>
+                  <span className="text-xs text-white/70">from 120+ founders</span>
                 </div>
               </div>
             </Reveal>
           </div>
 
-          {/* RIGHT */}
-          <div className="relative md:min-h-[540px]">
-            <Reveal direction="scale">
-              <div
-                className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-[32px] border border-white/70 bg-black shadow-[0_25px_70px_-20px_rgba(15,50,70,0.25)]"
-                style={{ transform: px(-12) }}
-              >
-                <video
-                  src={heroVideoAsset.url}
-                  poster={heroStrategist}
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  preload="metadata"
-                  aria-label="AYMO Digital cinematic hero reel"
-                  className="h-full w-full object-cover"
-                />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
-              </div>
-            </Reveal>
-
+          {/* RIGHT — floating overlay cards */}
+          <div className="relative hidden lg:block min-h-[500px]">
             {/* Floating Card: Revenue */}
             <div
-              className="glass hidden md:block absolute -left-2 sm:-left-8 top-6 w-56 rounded-2xl p-4 animate-float"
+              className="glass absolute right-8 top-2 w-56 rounded-2xl p-4 animate-float"
               style={{ transform: px(18) }}
             >
               <div className="flex items-center justify-between">
@@ -209,7 +203,7 @@ function Hero() {
 
             {/* Floating Card: AI Automation */}
             <div
-              className="glass hidden md:block absolute -right-2 sm:-right-6 top-24 w-60 rounded-2xl p-4 animate-float"
+              className="glass absolute -right-2 top-48 w-60 rounded-2xl p-4 animate-float"
               style={{ animationDelay: "1.2s", transform: px(22) }}
             >
               <div className="flex items-center gap-3">
@@ -235,7 +229,7 @@ function Hero() {
 
             {/* Floating Card: YouTube */}
             <div
-              className="glass hidden lg:block absolute left-0 sm:-left-10 bottom-24 w-52 rounded-2xl p-4 animate-float"
+              className="glass absolute left-2 bottom-8 w-52 rounded-2xl p-4 animate-float"
               style={{ animationDelay: "2.4s", transform: px(16) }}
             >
               <div className="flex items-center gap-2">
@@ -249,26 +243,10 @@ function Hero() {
               </div>
             </div>
 
-            {/* Floating Card: TikTok */}
-            <div
-              className="glass hidden lg:block absolute right-0 sm:-right-4 bottom-32 w-48 rounded-2xl p-3.5 animate-float"
-              style={{ animationDelay: "0.6s", transform: px(20) }}
-            >
-              <div className="flex items-center gap-2">
-                <div className="grid h-9 w-9 place-items-center rounded-xl bg-slate-900 text-white">
-                  <Music2 size={16} />
-                </div>
-                <div>
-                  <div className="text-xs text-muted-foreground">TikTok reach</div>
-                  <div className="text-sm font-bold">2.4M views</div>
-                </div>
-              </div>
-            </div>
-
             {/* Floating Card: Client Satisfaction */}
             <div
-              className="glass hidden md:block absolute left-1/2 -translate-x-1/2 -bottom-2 w-64 rounded-2xl p-3.5 animate-float"
-              style={{ animationDelay: "1.8s", transform: `translate(calc(-50% + ${(mouse.x * 14).toFixed(1)}px), ${(mouse.y * 14).toFixed(1)}px)` }}
+              className="glass absolute right-12 bottom-2 w-60 rounded-2xl p-3.5 animate-float"
+              style={{ animationDelay: "1.8s", transform: px(14) }}
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
@@ -286,8 +264,6 @@ function Hero() {
             </div>
           </div>
         </div>
-
-
 
         {/* Booking-widget style metric strip */}
         <Reveal direction="up" delay={400}>
@@ -319,7 +295,7 @@ function Hero() {
                 </div>
               ))}
             </div>
-          </div>
+
         </Reveal>
       </div>
     </section>
