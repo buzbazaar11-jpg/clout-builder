@@ -89,33 +89,31 @@ function Hero() {
     <section className="container-px mx-auto max-w-7xl pt-8 md:pt-12">
       <div
         ref={heroRef}
-        className="relative overflow-hidden rounded-[36px] bg-slate-950 px-6 py-16 md:px-12 md:py-24 lg:py-28"
+        className="relative overflow-hidden rounded-[36px] bg-gradient-to-br from-[oklch(0.96_0.02_205)] via-white to-[oklch(0.94_0.03_210)] px-6 py-16 md:px-12 md:py-24 lg:py-28"
       >
-        {/* Background video */}
-        <video
-          src={heroVideoAsset.url}
-          poster={heroStrategist}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
+        {/* Soft background image — barely visible, premium feel */}
+        <img
+          src={heroStrategist}
+          alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.12] mix-blend-luminosity"
         />
-        {/* Dark + brand gradient overlays for readability */}
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-slate-950/85 via-slate-950/70 to-slate-900/60" />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent" />
-        <div className="pointer-events-none absolute -top-32 -left-24 h-[420px] w-[420px] rounded-full bg-primary/30 blur-3xl animate-blob" />
-        <div className="pointer-events-none absolute -bottom-40 right-0 h-[460px] w-[460px] rounded-full bg-[oklch(0.78_0.13_220/0.30)] blur-3xl animate-blob" style={{ animationDelay: "3s" }} />
+        {/* Light wash so foreground stays crisp */}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/70 via-white/40 to-white/70" />
+        {/* Premium animated blobs */}
+        <div className="pointer-events-none absolute -top-40 -left-32 h-[520px] w-[520px] rounded-full bg-primary/25 blur-3xl animate-blob" />
+        <div className="pointer-events-none absolute -bottom-48 -right-24 h-[560px] w-[560px] rounded-full bg-[oklch(0.78_0.13_220/0.28)] blur-3xl animate-blob" style={{ animationDelay: "3s" }} />
+        <div className="pointer-events-none absolute top-1/3 right-1/3 h-[320px] w-[320px] rounded-full bg-[oklch(0.85_0.14_85/0.22)] blur-3xl animate-blob" style={{ animationDelay: "6s" }} />
+        {/* Subtle grid texture */}
+        <div className="pointer-events-none absolute inset-0 opacity-[0.06] [background-image:linear-gradient(to_right,oklch(0.55_0.13_215)_1px,transparent_1px),linear-gradient(to_bottom,oklch(0.55_0.13_215)_1px,transparent_1px)] [background-size:48px_48px]" />
 
         <div className="relative grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-center">
           {/* LEFT */}
           <div>
             <Reveal direction="up">
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-white backdrop-blur">
+              <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-white/80 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-primary backdrop-blur">
                 <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-70" />
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-60" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
                 </span>
                 AI · Automation · Growth
@@ -123,7 +121,7 @@ function Hero() {
             </Reveal>
 
             <Reveal direction="up" delay={80}>
-              <h1 className="mt-6 font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05] tracking-tight text-white">
+              <h1 className="mt-6 font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05] tracking-tight text-foreground">
                 Scale Your Business with{" "}
                 <span className="text-gold-gradient">AI Automation,</span>{" "}
                 Content & Digital Growth
@@ -131,7 +129,7 @@ function Hero() {
             </Reveal>
 
             <Reveal direction="up" delay={160}>
-              <p className="mt-6 max-w-xl text-base md:text-lg text-white/80 leading-relaxed">
+              <p className="mt-6 max-w-xl text-base md:text-lg text-muted-foreground leading-relaxed">
                 We build automated systems that generate leads, sales and revenue — combining
                 AI workflows, performance marketing and authority content across YouTube,
                 LinkedIn and Short-Form.
@@ -149,9 +147,9 @@ function Hero() {
                 </Link>
                 <Link
                   to="/case-studies"
-                  className="inline-flex items-center gap-2 rounded-2xl border border-white/30 bg-white/10 px-6 py-3.5 text-sm font-semibold text-white backdrop-blur transition hover:border-white/60 hover:bg-white/20"
+                  className="inline-flex items-center gap-2 rounded-2xl border border-border bg-white/70 px-6 py-3.5 text-sm font-semibold text-foreground backdrop-blur transition hover:border-primary/50 hover:bg-white"
                 >
-                  <PlayCircle size={16} className="text-white" />
+                  <PlayCircle size={16} className="text-primary" />
                   View Results
                 </Link>
               </div>
@@ -168,12 +166,14 @@ function Hero() {
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} size={14} className="fill-amber-400 text-amber-400" />
                   ))}
-                  <span className="ml-1.5 text-sm font-semibold text-white">4.9/5</span>
-                  <span className="text-xs text-white/70">from 120+ founders</span>
+                  <span className="ml-1.5 text-sm font-semibold text-foreground">4.9/5</span>
+                  <span className="text-xs text-muted-foreground">from 120+ founders</span>
                 </div>
               </div>
             </Reveal>
           </div>
+
+
 
           {/* RIGHT — floating overlay cards */}
           <div className="relative hidden lg:block min-h-[500px]">
