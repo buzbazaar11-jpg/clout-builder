@@ -22,7 +22,13 @@ import {
   CheckCircle2,
   Quote,
   PlayCircle,
+  MessageCircle,
+  ChevronLeft,
+  ChevronRight,
+  Crown,
+  Linkedin as LinkedinIcon,
 } from "lucide-react";
+import { whatsappLink, PHONE_INTL_DISPLAY } from "@/lib/contact-info";
 import { Section, CTAStrip } from "../components/site/Section";
 import { Reveal, CountUp } from "../components/site/Reveal";
 
