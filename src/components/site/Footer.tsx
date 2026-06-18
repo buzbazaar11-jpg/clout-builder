@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Mail, Phone, MessageCircle } from "lucide-react";
+import { Mail, Phone, MessageCircle, MapPin } from "lucide-react";
 import { Logo } from "./Logo";
 import { PHONE_TEL, PHONE_INTL_DISPLAY, whatsappLink, EMAIL_PRIMARY, EMAIL_SECONDARY } from "@/lib/contact-info";
 
