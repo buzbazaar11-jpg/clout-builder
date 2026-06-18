@@ -23,8 +23,6 @@ import {
   Quote,
   PlayCircle,
 } from "lucide-react";
-import heroStrategist from "../assets/hero-strategist.jpg";
-import heroVideoAsset from "../assets/hero-animate.mp4.asset.json";
 import { Section, CTAStrip } from "../components/site/Section";
 import { Reveal, CountUp } from "../components/site/Reveal";
 
@@ -55,7 +53,8 @@ function HomePage() {
       <Services />
       <Process />
       <Results />
-      <Testimonials />
+      <TestimonialsMarquee />
+      <TeamHierarchy />
       <Authority />
       <Pricing />
       <CTAStrip />
@@ -89,23 +88,12 @@ function Hero() {
     <section className="container-px mx-auto max-w-7xl pt-8 md:pt-12">
       <div
         ref={heroRef}
-        className="relative overflow-hidden rounded-[36px] bg-gradient-to-br from-[oklch(0.96_0.02_205)] via-white to-[oklch(0.94_0.03_210)] px-6 py-16 md:px-12 md:py-24 lg:py-28"
+        className="relative overflow-hidden rounded-[36px] bg-gradient-to-br from-[oklch(0.97_0.015_205)] via-white to-[oklch(0.95_0.02_215)] px-6 py-16 md:px-12 md:py-24 lg:py-28"
       >
-        {/* Soft background image — barely visible, premium feel */}
-        <img
-          src={heroStrategist}
-          alt=""
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.12] mix-blend-luminosity"
-        />
-        {/* Light wash so foreground stays crisp */}
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/70 via-white/40 to-white/70" />
-        {/* Premium animated blobs */}
-        <div className="pointer-events-none absolute -top-40 -left-32 h-[520px] w-[520px] rounded-full bg-primary/25 blur-3xl animate-blob" />
-        <div className="pointer-events-none absolute -bottom-48 -right-24 h-[560px] w-[560px] rounded-full bg-[oklch(0.78_0.13_220/0.28)] blur-3xl animate-blob" style={{ animationDelay: "3s" }} />
-        <div className="pointer-events-none absolute top-1/3 right-1/3 h-[320px] w-[320px] rounded-full bg-[oklch(0.85_0.14_85/0.22)] blur-3xl animate-blob" style={{ animationDelay: "6s" }} />
-        {/* Subtle grid texture */}
-        <div className="pointer-events-none absolute inset-0 opacity-[0.06] [background-image:linear-gradient(to_right,oklch(0.55_0.13_215)_1px,transparent_1px),linear-gradient(to_bottom,oklch(0.55_0.13_215)_1px,transparent_1px)] [background-size:48px_48px]" />
+        {/* Soft single-tone wash — clean and minimal */}
+        <div className="pointer-events-none absolute -top-32 -right-24 h-[420px] w-[420px] rounded-full bg-primary/10 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-32 -left-24 h-[380px] w-[380px] rounded-full bg-[oklch(0.85_0.08_220/0.12)] blur-3xl" />
+
 
         <div className="relative grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-center">
           {/* LEFT */}
