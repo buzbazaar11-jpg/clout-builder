@@ -22,9 +22,13 @@ import {
   CheckCircle2,
   Quote,
   PlayCircle,
+  MessageCircle,
+  ChevronLeft,
+  ChevronRight,
+  Crown,
+  Linkedin as LinkedinIcon,
 } from "lucide-react";
-import heroStrategist from "../assets/hero-strategist.jpg";
-import heroVideoAsset from "../assets/hero-animate.mp4.asset.json";
+import { whatsappLink, PHONE_INTL_DISPLAY } from "@/lib/contact-info";
 import { Section, CTAStrip } from "../components/site/Section";
 import { Reveal, CountUp } from "../components/site/Reveal";
 
@@ -55,7 +59,8 @@ function HomePage() {
       <Services />
       <Process />
       <Results />
-      <Testimonials />
+      <TestimonialsMarquee />
+      <TeamHierarchy />
       <Authority />
       <Pricing />
       <CTAStrip />
@@ -89,23 +94,12 @@ function Hero() {
     <section className="container-px mx-auto max-w-7xl pt-8 md:pt-12">
       <div
         ref={heroRef}
-        className="relative overflow-hidden rounded-[36px] bg-gradient-to-br from-[oklch(0.96_0.02_205)] via-white to-[oklch(0.94_0.03_210)] px-6 py-16 md:px-12 md:py-24 lg:py-28"
+        className="relative overflow-hidden rounded-[36px] bg-gradient-to-br from-[oklch(0.97_0.015_205)] via-white to-[oklch(0.95_0.02_215)] px-6 py-16 md:px-12 md:py-24 lg:py-28"
       >
-        {/* Soft background image — barely visible, premium feel */}
-        <img
-          src={heroStrategist}
-          alt=""
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.12] mix-blend-luminosity"
-        />
-        {/* Light wash so foreground stays crisp */}
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/70 via-white/40 to-white/70" />
-        {/* Premium animated blobs */}
-        <div className="pointer-events-none absolute -top-40 -left-32 h-[520px] w-[520px] rounded-full bg-primary/25 blur-3xl animate-blob" />
-        <div className="pointer-events-none absolute -bottom-48 -right-24 h-[560px] w-[560px] rounded-full bg-[oklch(0.78_0.13_220/0.28)] blur-3xl animate-blob" style={{ animationDelay: "3s" }} />
-        <div className="pointer-events-none absolute top-1/3 right-1/3 h-[320px] w-[320px] rounded-full bg-[oklch(0.85_0.14_85/0.22)] blur-3xl animate-blob" style={{ animationDelay: "6s" }} />
-        {/* Subtle grid texture */}
-        <div className="pointer-events-none absolute inset-0 opacity-[0.06] [background-image:linear-gradient(to_right,oklch(0.55_0.13_215)_1px,transparent_1px),linear-gradient(to_bottom,oklch(0.55_0.13_215)_1px,transparent_1px)] [background-size:48px_48px]" />
+        {/* Soft single-tone wash — clean and minimal */}
+        <div className="pointer-events-none absolute -top-32 -right-24 h-[420px] w-[420px] rounded-full bg-primary/10 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-32 -left-24 h-[380px] w-[380px] rounded-full bg-[oklch(0.85_0.08_220/0.12)] blur-3xl" />
+
 
         <div className="relative grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-center">
           {/* LEFT */}
@@ -145,13 +139,22 @@ function Hero() {
                   Book Free Strategy Call
                   <ArrowRight size={16} className="transition group-hover:translate-x-1" />
                 </Link>
-                <Link
-                  to="/case-studies"
+                <a
+                  href={whatsappLink()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-2xl bg-emerald-500 px-6 py-3.5 text-sm font-semibold text-white shadow-[0_15px_40px_-12px_rgba(16,185,129,0.55)] transition hover:-translate-y-0.5 hover:bg-emerald-600"
+                >
+                  <MessageCircle size={16} />
+                  WhatsApp Us
+                </a>
+                <a
+                  href="tel:+923256900925"
                   className="inline-flex items-center gap-2 rounded-2xl border border-border bg-white/70 px-6 py-3.5 text-sm font-semibold text-foreground backdrop-blur transition hover:border-primary/50 hover:bg-white"
                 >
                   <PlayCircle size={16} className="text-primary" />
-                  View Results
-                </Link>
+                  Call {PHONE_INTL_DISPLAY}
+                </a>
               </div>
             </Reveal>
 
@@ -504,61 +507,100 @@ function Results() {
   );
 }
 
-/* -------------------------- TESTIMONIALS -------------------------- */
+/* -------------------- TESTIMONIALS — INFINITE MARQUEE -------------------- */
 
-function Testimonials() {
-  const items = [
-    {
-      quote:
-        "Within 4 months we 3x'd inbound demos and finally stopped relying on cold outreach. The AI workflows are insane.",
-      name: "Sarah K.",
-      role: "Founder, B2B SaaS · UK",
-    },
-    {
-      quote:
-        "Our YouTube went from 800 to 52,000 subs and is now our #1 acquisition channel. AYMO is part of our team.",
-      name: "Ahmed R.",
-      role: "CEO, Consulting · UAE",
-    },
-    {
-      quote:
-        "Conversion rate on our landing pages went from 1.4% to 4.8%. They moved fast and treated our business like their own.",
-      name: "Daniel M.",
-      role: "Founder, E-commerce · USA",
-    },
-  ];
+const TESTIMONIALS = [
+  { quote: "Within 4 months we 3x'd inbound demos and finally stopped relying on cold outreach. The AI workflows are insane.", name: "Sarah K.", role: "Founder · B2B SaaS", country: "🇬🇧 UK" },
+  { quote: "Our YouTube went from 800 to 52,000 subs and is now our #1 acquisition channel. AYMO is part of our team.", name: "Ahmed R.", role: "CEO · Consulting", country: "🇦🇪 UAE" },
+  { quote: "Conversion rate on landing pages went from 1.4% to 4.8%. They moved fast and treated our business like their own.", name: "Daniel M.", role: "Founder · E-commerce", country: "🇺🇸 USA" },
+  { quote: "Pipeline grew 312% in 6 months. The AI lead-gen agent alone replaced 2 SDR hires.", name: "Fatima A.", role: "COO · Fintech", country: "🇸🇦 KSA" },
+  { quote: "Their LinkedIn system turned our CEO into a category authority. Inbound from C-suite is now routine.", name: "James O.", role: "CMO · Enterprise SaaS", country: "🇺🇸 USA" },
+  { quote: "Shorts strategy alone drove 18M views in 90 days. Plug-and-play growth machine.", name: "Priya N.", role: "Creator · Coaching", country: "🇨🇦 CA" },
+  { quote: "From idea to launch in 3 weeks. The team is sharp, accountable and obsessed with outcomes.", name: "Liam T.", role: "Founder · D2C", country: "🇦🇺 AU" },
+  { quote: "Best ROI on any marketing partner we've worked with. Their automation freed up 30 hrs/week.", name: "Noor H.", role: "Founder · Agency", country: "🇦🇪 UAE" },
+];
+
+function TestimonialCard({ t }: { t: (typeof TESTIMONIALS)[number] }) {
+  return (
+    <div className="soft-card mx-3 flex h-full w-[300px] shrink-0 flex-col rounded-3xl p-6 sm:w-[360px] sm:p-7">
+      <Quote size={26} className="text-primary/40" />
+      <p className="mt-3 text-sm leading-relaxed text-foreground/90">"{t.quote}"</p>
+      <div className="mt-5 flex items-center gap-3 border-t border-border pt-4">
+        <div className="grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-primary to-[oklch(0.65_0.14_220)] text-sm font-bold text-white">
+          {t.name.charAt(0)}
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className="truncate text-sm font-semibold">{t.name}</div>
+          <div className="truncate text-xs text-muted-foreground">{t.role} · {t.country}</div>
+        </div>
+        <div className="flex shrink-0">
+          {[...Array(5)].map((_, i) => (
+            <Star key={i} size={11} className="fill-amber-400 text-amber-400" />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function TestimonialsMarquee() {
+  const [paused, setPaused] = useState(false);
+  const trackRef = useRef<HTMLDivElement>(null);
+
+  const scrollBy = (dir: 1 | -1) => {
+    const el = trackRef.current;
+    if (!el) return;
+    el.scrollBy({ left: dir * 380, behavior: "smooth" });
+  };
+
+  const items = [...TESTIMONIALS, ...TESTIMONIALS];
+
   return (
     <Section
       eyebrow="Social Proof"
       title={<>Founders & operators <span className="text-gold-gradient">love working with us</span></>}
       subtitle="What our clients across the world are saying."
     >
-      <div className="grid gap-6 md:grid-cols-3">
-        {items.map((t, i) => (
-          <Reveal key={t.name} delay={i * 100} direction={i === 1 ? "up" : i === 0 ? "left" : "right"}>
-            <div className="soft-card flex h-full flex-col rounded-3xl p-7 transition hover:-translate-y-1">
-              <Quote size={28} className="text-primary/40" />
-              <p className="mt-4 text-sm leading-relaxed text-foreground/90">"{t.quote}"</p>
-              <div className="mt-6 flex items-center gap-3 border-t border-border pt-5">
-                <div className="grid h-11 w-11 place-items-center rounded-full bg-gradient-to-br from-primary to-[oklch(0.65_0.14_220)] text-sm font-bold text-white">
-                  {t.name.charAt(0)}
-                </div>
-                <div>
-                  <div className="text-sm font-semibold">{t.name}</div>
-                  <div className="text-xs text-muted-foreground">{t.role}</div>
-                </div>
-                <div className="ml-auto flex">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={12} className="fill-amber-400 text-amber-400" />
-                  ))}
-                </div>
-              </div>
-            </div>
-          </Reveal>
+      <div
+        className="relative -mx-4 overflow-hidden sm:-mx-6 lg:-mx-8"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+      >
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-background to-transparent sm:w-24" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-background to-transparent sm:w-24" />
+        <div
+          className="flex w-max animate-marquee py-2"
+          style={{ animationPlayState: paused ? "paused" : "running" }}
+        >
+          {items.map((t, i) => (
+            <TestimonialCard key={`${t.name}-${i}`} t={t} />
+          ))}
+        </div>
+      </div>
+
+      <div className="mt-8 flex items-center justify-between gap-4">
+        <div className="text-xs text-muted-foreground">⭐ 4.9/5 from 120+ founders · drag or use arrows</div>
+        <div className="flex gap-2">
+          <button onClick={() => scrollBy(-1)} aria-label="Previous" className="grid h-10 w-10 place-items-center rounded-full border border-border bg-white text-foreground transition hover:border-primary/50 hover:bg-primary hover:text-white">
+            <ChevronLeft size={18} />
+          </button>
+          <button onClick={() => scrollBy(1)} aria-label="Next" className="grid h-10 w-10 place-items-center rounded-full border border-border bg-white text-foreground transition hover:border-primary/50 hover:bg-primary hover:text-white">
+            <ChevronRight size={18} />
+          </button>
+        </div>
+      </div>
+
+      <div
+        ref={trackRef}
+        className="mt-4 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      >
+        {TESTIMONIALS.map((t, i) => (
+          <div key={`carousel-${i}`} className="snap-start">
+            <TestimonialCard t={t} />
+          </div>
         ))}
       </div>
 
-      {/* social channel strip */}
       <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-5">
         {[
           { Icon: Youtube, label: "YouTube", color: "text-red-500", bg: "bg-red-50" },
@@ -574,6 +616,95 @@ function Testimonials() {
             <span className="text-sm font-medium">{label}</span>
           </div>
         ))}
+      </div>
+    </Section>
+  );
+}
+
+/* -------------------------- TEAM HIERARCHY -------------------------- */
+
+function TeamHierarchy() {
+  const founders = [
+    { name: "Ayyan Saleem", role: "Founder & CEO", bio: "8+ yrs scaling AI, content & paid growth systems for global founders.", tag: "Strategy · AI", gradient: "from-primary to-[oklch(0.65_0.14_220)]" },
+    { name: "M. Owais", role: "Co-Founder & COO", bio: "Operations leader behind 320+ launched campaigns across 6 countries.", tag: "Operations", gradient: "from-[oklch(0.65_0.14_220)] to-[oklch(0.55_0.13_260)]" },
+  ];
+  const leads = [
+    { name: "AI & Automation Lead", count: "9 engineers", icon: Bot },
+    { name: "Performance Marketing Lead", count: "11 media buyers", icon: BarChart3 },
+    { name: "Content & Creative Lead", count: "14 producers", icon: Sparkles },
+    { name: "Client Success Lead", count: "6 strategists", icon: Users },
+  ];
+  return (
+    <Section
+      eyebrow="Team Hierarchy"
+      title={<>The team behind <span className="text-gold-gradient">your growth</span></>}
+      subtitle="Founders leading from the front, supported by specialists across AI, paid media, content and client success."
+    >
+      <div className="grid gap-6 md:grid-cols-2">
+        {founders.map((f, i) => (
+          <Reveal key={f.name} delay={i * 100} direction={i === 0 ? "left" : "right"}>
+            <div className="soft-card relative overflow-hidden rounded-3xl p-7">
+              <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-primary/5 blur-2xl" />
+              <div className="flex items-start gap-4">
+                <div className={`grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-gradient-to-br ${f.gradient} text-white shadow-lg`}>
+                  <span className="text-xl font-bold">{f.name.split(" ").map(n => n[0]).join("")}</span>
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center gap-2">
+                    <Crown size={14} className="text-amber-500" />
+                    <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-amber-600">Leadership</span>
+                  </div>
+                  <h3 className="mt-1 text-xl font-bold text-foreground">{f.name}</h3>
+                  <div className="text-sm font-medium text-primary">{f.role}</div>
+                </div>
+              </div>
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{f.bio}</p>
+              <div className="mt-5 flex items-center justify-between">
+                <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">{f.tag}</span>
+                <LinkedinIcon size={16} className="text-sky-600" />
+              </div>
+            </div>
+          </Reveal>
+        ))}
+      </div>
+
+      <div className="my-6 hidden justify-center md:flex">
+        <div className="h-10 w-px bg-gradient-to-b from-primary/40 to-transparent" />
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {leads.map((l, i) => (
+          <Reveal key={l.name} delay={i * 80}>
+            <div className="soft-card flex h-full items-start gap-4 rounded-3xl p-5">
+              <div className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-primary/15 to-primary/5 text-primary">
+                <l.icon size={20} />
+              </div>
+              <div>
+                <div className="text-sm font-semibold text-foreground">{l.name}</div>
+                <div className="mt-0.5 text-xs text-muted-foreground">{l.count}</div>
+              </div>
+            </div>
+          </Reveal>
+        ))}
+      </div>
+
+      <div className="mt-10 grid gap-4 rounded-3xl border border-primary/20 bg-gradient-to-r from-primary/5 via-white to-[oklch(0.92_0.04_220/0.3)] p-6 sm:grid-cols-3">
+        {[
+          { v: "8+", l: "Years of experience" },
+          { v: "40+", l: "Specialists across 4 countries" },
+          { v: "320+", l: "Projects delivered globally" },
+        ].map((c) => (
+          <div key={c.l} className="text-center">
+            <div className="text-3xl font-extrabold text-gold-gradient">{c.v}</div>
+            <div className="mt-1 text-xs uppercase tracking-wide text-muted-foreground">{c.l}</div>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-6 flex justify-center">
+        <Link to="/about/team" className="inline-flex items-center gap-2 rounded-2xl border border-border bg-white px-5 py-3 text-sm font-semibold text-foreground transition hover:border-primary/50 hover:bg-primary hover:text-white">
+          Meet the full team <ArrowRight size={14} />
+        </Link>
       </div>
     </Section>
   );

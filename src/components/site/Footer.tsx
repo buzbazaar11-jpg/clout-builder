@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MessageCircle, MapPin } from "lucide-react";
 import { Logo } from "./Logo";
+import { PHONE_TEL, PHONE_INTL_DISPLAY, whatsappLink, EMAIL_PRIMARY, EMAIL_SECONDARY } from "@/lib/contact-info";
 
 export function Footer() {
   return (
@@ -14,17 +15,17 @@ export function Footer() {
             <span className="font-semibold text-foreground">AM Enterprises</span>.
           </p>
           <div className="mt-5 space-y-2 text-sm">
-            <a href="mailto:info@aymo.digital" className="flex items-center gap-2 text-foreground/80 hover:text-primary">
-              <Mail size={14} className="text-primary" /> info@aymo.digital
+            <a href={`mailto:${EMAIL_PRIMARY}`} className="flex items-center gap-2 text-foreground/80 hover:text-primary">
+              <Mail size={14} className="text-primary" /> {EMAIL_PRIMARY}
             </a>
-            <a href="mailto:info@amenterprises.tech" className="flex items-center gap-2 text-foreground/80 hover:text-primary">
-              <Mail size={14} className="text-primary" /> info@amenterprises.tech
+            <a href={`mailto:${EMAIL_SECONDARY}`} className="flex items-center gap-2 text-foreground/80 hover:text-primary">
+              <Mail size={14} className="text-primary" /> {EMAIL_SECONDARY}
             </a>
-            <a href="tel:+447717229638" className="flex items-center gap-2 text-foreground/80 hover:text-primary">
-              <Phone size={14} className="text-primary" /> +44 7717 229638 (UK)
+            <a href={`tel:${PHONE_TEL}`} className="flex items-center gap-2 text-foreground/80 hover:text-primary">
+              <Phone size={14} className="text-primary" /> {PHONE_INTL_DISPLAY}
             </a>
-            <a href="tel:+923173712950" className="flex items-center gap-2 text-foreground/80 hover:text-primary">
-              <Phone size={14} className="text-primary" /> +92 317 3712950 (PK)
+            <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-foreground/80 hover:text-emerald-600">
+              <MessageCircle size={14} className="text-emerald-500" /> WhatsApp us
             </a>
           </div>
         </div>

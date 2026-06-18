@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react";
-import { MessageCircle, ArrowUp, Phone } from "lucide-react";
-
-const WHATSAPP_NUMBER = "923001234567"; // International format, no + or spaces
-const WHATSAPP_MESSAGE = encodeURIComponent(
-  "Hi AYMO Digital! I'd like to know more about your services."
-);
+import { MessageCircle, ArrowUp, Phone, X } from "lucide-react";
+import { PHONE_TEL, PHONE_INTL_DISPLAY, whatsappLink } from "@/lib/contact-info";
 
 export function FloatingWidgets() {
   const [show, setShow] = useState(false);
@@ -21,20 +17,25 @@ export function FloatingWidgets() {
     <div className="fixed bottom-4 right-4 z-50 flex flex-col items-end gap-3 sm:bottom-6 sm:right-6">
       {open && (
         <div className="animate-fade-in w-[260px] rounded-2xl border border-border bg-white p-4 shadow-[0_20px_60px_-15px_rgba(15,50,70,0.25)]">
-          <div className="flex items-center gap-2">
-            <div className="grid h-9 w-9 place-items-center rounded-full bg-emerald-500 text-white">
-              <MessageCircle size={18} />
+          <div className="flex items-start justify-between">
+            <div className="flex items-center gap-2">
+              <div className="grid h-9 w-9 place-items-center rounded-full bg-emerald-500 text-white">
+                <MessageCircle size={18} />
+              </div>
+              <div>
+                <div className="text-sm font-semibold text-foreground">AYMO Digital</div>
+                <div className="text-[11px] text-emerald-600">● Online now</div>
+              </div>
             </div>
-            <div>
-              <div className="text-sm font-semibold text-foreground">AYMO Digital</div>
-              <div className="text-[11px] text-emerald-600">● Online now</div>
-            </div>
+            <button onClick={() => setOpen(false)} aria-label="Close" className="text-muted-foreground hover:text-foreground">
+              <X size={16} />
+            </button>
           </div>
           <p className="mt-3 text-xs text-muted-foreground">
             Hi there 👋 How can we help you scale your business today?
           </p>
           <a
-            href={`https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`}
+            href={whatsappLink()}
             target="_blank"
             rel="noopener noreferrer"
             className="mt-3 flex items-center justify-center gap-2 rounded-xl bg-emerald-500 px-3 py-2.5 text-xs font-semibold text-white transition hover:bg-emerald-600"
@@ -42,10 +43,10 @@ export function FloatingWidgets() {
             <MessageCircle size={14} /> Chat on WhatsApp
           </a>
           <a
-            href="tel:+923001234567"
+            href={`tel:${PHONE_TEL}`}
             className="mt-2 flex items-center justify-center gap-2 rounded-xl border border-border px-3 py-2.5 text-xs font-semibold text-foreground transition hover:bg-secondary"
           >
-            <Phone size={14} /> Call us
+            <Phone size={14} /> Call {PHONE_INTL_DISPLAY}
           </a>
         </div>
       )}

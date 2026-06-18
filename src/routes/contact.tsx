@@ -35,9 +35,7 @@ const emails = [
 ];
 
 const phones = [
-  { label: "UK", value: "+44 7717 229638", href: "tel:+447717229638" },
-  { label: "Pakistan", value: "+92 317 3712950", href: "tel:+923173712950" },
-  { label: "Pakistan (Alt)", value: "0325 6900925", href: "tel:+923256900925" },
+  { label: "Primary", value: "0325 6900925 (+92 325 6900925)", href: "tel:+923256900925" },
 ];
 
 const locations = [
