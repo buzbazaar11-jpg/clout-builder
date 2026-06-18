@@ -139,13 +139,22 @@ function Hero() {
                   Book Free Strategy Call
                   <ArrowRight size={16} className="transition group-hover:translate-x-1" />
                 </Link>
-                <Link
-                  to="/case-studies"
+                <a
+                  href={whatsappLink()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-2xl bg-emerald-500 px-6 py-3.5 text-sm font-semibold text-white shadow-[0_15px_40px_-12px_rgba(16,185,129,0.55)] transition hover:-translate-y-0.5 hover:bg-emerald-600"
+                >
+                  <MessageCircle size={16} />
+                  WhatsApp Us
+                </a>
+                <a
+                  href="tel:+923256900925"
                   className="inline-flex items-center gap-2 rounded-2xl border border-border bg-white/70 px-6 py-3.5 text-sm font-semibold text-foreground backdrop-blur transition hover:border-primary/50 hover:bg-white"
                 >
                   <PlayCircle size={16} className="text-primary" />
-                  View Results
-                </Link>
+                  Call {PHONE_INTL_DISPLAY}
+                </a>
               </div>
             </Reveal>
 
