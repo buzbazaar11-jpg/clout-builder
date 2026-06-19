@@ -5,6 +5,8 @@ import { toast } from "sonner";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { Section } from "../components/site/Section";
 import { Toaster } from "../components/ui/sonner";
+import { supabase } from "@/integrations/supabase/client";
+import { whatsappLink } from "@/lib/contact-info";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -56,10 +58,26 @@ function ContactPage() {
       return;
     }
     setSubmitting(true);
-    await new Promise((r) => setTimeout(r, 700));
-    setSubmitting(false);
-    (e.target as HTMLFormElement).reset();
-    toast.success("Got it. We'll be in touch within 24 hours.");
+    try {
+      const { error } = await supabase.from("leads").insert({
+        name: parsed.data.name,
+        email: parsed.data.email,
+        company: parsed.data.business,
+        service_interest: parsed.data.service,
+        message: parsed.data.goal,
+        source: "contact_page",
+      });
+      if (error) throw error;
+      // Also send to WhatsApp
+      const waMsg = `New Lead from website%0A%0AName: ${parsed.data.name}%0AEmail: ${parsed.data.email}%0ABusiness: ${parsed.data.business}%0AService: ${parsed.data.service}%0AGoal: ${parsed.data.goal}`;
+      window.open(whatsappLink(waMsg), "_blank", "noopener,noreferrer");
+      (e.target as HTMLFormElement).reset();
+      toast.success("Got it. We'll be in touch within 24 hours.");
+    } catch (err: any) {
+      toast.error(err?.message ?? "Submission failed");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
