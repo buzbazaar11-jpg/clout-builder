@@ -69,7 +69,7 @@ function ContactPage() {
       });
       if (error) throw error;
       // Also send to WhatsApp
-      const waMsg = `New Lead from website%0A%0AName: ${parsed.data.name}%0AEmail: ${parsed.data.email}%0ABusiness: ${parsed.data.business}%0AService: ${parsed.data.service}%0AGoal: ${parsed.data.goal}`;
+      const waMsg = `New Lead from website\n\nName: ${parsed.data.name}\nEmail: ${parsed.data.email}\nBusiness: ${parsed.data.business}\nService: ${parsed.data.service}\nGoal: ${parsed.data.goal}`;
       window.open(whatsappLink(waMsg), "_blank", "noopener,noreferrer");
       (e.target as HTMLFormElement).reset();
       toast.success("Got it. We'll be in touch within 24 hours.");
