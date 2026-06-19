@@ -29,6 +29,8 @@ import {
   Linkedin as LinkedinIcon,
 } from "lucide-react";
 import { whatsappLink, PHONE_INTL_DISPLAY } from "@/lib/contact-info";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 import { Section, CTAStrip } from "../components/site/Section";
 import { Reveal, CountUp } from "../components/site/Reveal";
 
@@ -624,10 +626,23 @@ function TestimonialsMarquee() {
 /* -------------------------- TEAM HIERARCHY -------------------------- */
 
 function TeamHierarchy() {
-  const founders = [
-    { name: "Ayyan Saleem", role: "Founder & CEO", bio: "8+ yrs scaling AI, content & paid growth systems for global founders.", tag: "Strategy · AI", gradient: "from-primary to-[oklch(0.65_0.14_220)]" },
-    { name: "M. Owais", role: "Co-Founder & COO", bio: "Operations leader behind 320+ launched campaigns across 6 countries.", tag: "Operations", gradient: "from-[oklch(0.65_0.14_220)] to-[oklch(0.55_0.13_260)]" },
-  ];
+  const { data: foundersData } = useQuery({
+    queryKey: ["public", "team_members", "founders"],
+    queryFn: async () => {
+      const { data } = await supabase
+        .from("team_members")
+        .select("*")
+        .eq("is_founder", true)
+        .order("display_order", { ascending: true });
+      return data ?? [];
+    },
+  });
+  const founders =
+    foundersData && foundersData.length > 0
+      ? foundersData
+      : [
+          { id: "1", name: "Ayesha Tabassum", title: "Founder & CEO", bio: "Visionary founder leading AYMO Digital's mission to scale businesses with AI-powered growth systems.", image_url: null, linkedin_url: null },
+        ];
   const leads = [
     { name: "AI & Automation Lead", count: "9 engineers", icon: Bot },
     { name: "Performance Marketing Lead", count: "11 media buyers", icon: BarChart3 },
@@ -640,33 +655,41 @@ function TeamHierarchy() {
       title={<>The team behind <span className="text-gold-gradient">your growth</span></>}
       subtitle="Founders leading from the front, supported by specialists across AI, paid media, content and client success."
     >
-      <div className="grid gap-6 md:grid-cols-2">
-        {founders.map((f, i) => (
-          <Reveal key={f.name} delay={i * 100} direction={i === 0 ? "left" : "right"}>
+      <div className={`grid gap-6 ${founders.length === 1 ? "md:grid-cols-1 max-w-2xl mx-auto" : founders.length === 2 ? "md:grid-cols-2" : "md:grid-cols-2 lg:grid-cols-3"}`}>
+        {founders.map((f: any, i: number) => (
+          <Reveal key={f.id} delay={i * 100} direction={i === 0 ? "left" : "right"}>
             <div className="soft-card relative overflow-hidden rounded-3xl p-7">
               <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-primary/5 blur-2xl" />
               <div className="flex items-start gap-4">
-                <div className={`grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-gradient-to-br ${f.gradient} text-white shadow-lg`}>
-                  <span className="text-xl font-bold">{f.name.split(" ").map(n => n[0]).join("")}</span>
-                </div>
+                {f.image_url ? (
+                  <img src={f.image_url} alt={f.name} className="h-16 w-16 shrink-0 rounded-2xl object-cover shadow-lg" />
+                ) : (
+                  <div className="grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-primary to-[oklch(0.65_0.14_220)] text-white shadow-lg">
+                    <span className="text-xl font-bold">{f.name.split(" ").map((n: string) => n[0]).join("").slice(0, 2)}</span>
+                  </div>
+                )}
                 <div className="flex-1">
                   <div className="flex items-center gap-2">
                     <Crown size={14} className="text-amber-500" />
                     <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-amber-600">Leadership</span>
                   </div>
                   <h3 className="mt-1 text-xl font-bold text-foreground">{f.name}</h3>
-                  <div className="text-sm font-medium text-primary">{f.role}</div>
+                  <div className="text-sm font-medium text-primary">{f.title}</div>
                 </div>
               </div>
-              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{f.bio}</p>
-              <div className="mt-5 flex items-center justify-between">
-                <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">{f.tag}</span>
-                <LinkedinIcon size={16} className="text-sky-600" />
-              </div>
+              {f.bio && <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{f.bio}</p>}
+              {f.linkedin_url && (
+                <div className="mt-5 flex items-center justify-end">
+                  <a href={f.linkedin_url} target="_blank" rel="noopener noreferrer">
+                    <LinkedinIcon size={16} className="text-sky-600" />
+                  </a>
+                </div>
+              )}
             </div>
           </Reveal>
         ))}
       </div>
+
 
       <div className="my-6 hidden justify-center md:flex">
         <div className="h-10 w-px bg-gradient-to-b from-primary/40 to-transparent" />
